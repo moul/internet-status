@@ -10,6 +10,13 @@ import (
 
 func main() {
 	app := cli.NewApp()
+	app.Flags = []cli.Flag{
+	/*cli.BoolFlag{
+		Name:   "wait, w",
+		Usage:  "Blocks while periodically check for internet connectivity",
+		EnvVar: "INTERNETSTATUS_WAIT",
+	},*/
+	}
 	app.Action = run
 	app.Run(os.Args)
 }
