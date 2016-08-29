@@ -3,6 +3,8 @@
 
 This project aims to check multiple factors to determine your internet connectivity.
 
+---
+
 Provided pieces of information:
 * full IPv4 & IPv6 connectivity
 * connectivity limited to DNS servers only
