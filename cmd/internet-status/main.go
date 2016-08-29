@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/moul/internet-status"
@@ -16,11 +15,6 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	status, err := internetstatus.Full()
-	if err != nil {
-		log.Fatalf("Failed to check internet status: %v", err)
-	}
-
-	fmt.Println(status)
+	fmt.Println(internetstatus.Full())
 	return nil
 }
