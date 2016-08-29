@@ -1,4 +1,4 @@
-package checkinternet
+package internetstatus
 
 type Result struct {
 }

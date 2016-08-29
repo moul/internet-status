@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/moul/check-internet"
+	"github.com/moul/internet-status"
 	"github.com/urfave/cli"
 )
 
@@ -16,7 +16,7 @@ func main() {
 }
 
 func run(c *cli.Context) error {
-	status, err := checkinternet.Full()
+	status, err := internetstatus.Full()
 	if err != nil {
 		log.Fatalf("Failed to check internet status: %v", err)
 	}
