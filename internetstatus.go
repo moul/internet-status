@@ -15,6 +15,7 @@ type Result struct {
 	Type string
 
 	BehindCaptivePortal error
+	QueryGoogleDNSA     error
 	QueryRootDNSA       error
 	QueryRootDNSAAAA    error
 	CheckFacebookHTTP   error
@@ -28,6 +29,11 @@ func (r *Result) IPv4Access() bool {
 // IPv6Access returns true if IPv6 connectivity is available
 func (r *Result) IPv6Access() bool {
 	return r.QueryRootDNSAAAA == nil
+}
+
+// DNSAccess returns true if at least one DNS server successfully replied
+func (r *Result) DNSAccess() bool {
+	return r.QueryRootDNSA == nil || r.QueryGoogleDNSA == nil || r.QueryRootDNSAAAA == nil
 }
 
 // Access returns true if IPv4 or IPv6 connectivity is available
@@ -48,6 +54,7 @@ func (r *Result) Map() map[string]string {
 	return map[string]string{
 		"BehindCaptivePortal": checkReturnAsString(r.BehindCaptivePortal),
 		"CheckFacebookHTTP":   checkReturnAsString(r.CheckFacebookHTTP),
+		"QueryGoogleDNSA":     checkReturnAsString(r.QueryGoogleDNSA),
 		"QueryRootDNSA":       checkReturnAsString(r.QueryRootDNSA),
 		"QueryRootDNSAAAA":    checkReturnAsString(r.QueryRootDNSAAAA),
 	}
@@ -59,6 +66,7 @@ func Full() Result {
 		Type:                "full",
 		BehindCaptivePortal: captiveportal.Check(),
 		CheckFacebookHTTP:   checkhttp.CheckFacebookHTTP(),
+		QueryGoogleDNSA:     internetstatus_dns.QueryGoogleDNSA(),
 		QueryRootDNSA:       internetstatus_dns.QueryRootDNSA(),
 		QueryRootDNSAAAA:    internetstatus_dns.QueryRootDNSAAAA(),
 	}
@@ -70,6 +78,7 @@ func Quick() Result {
 		Type:                "full",
 		BehindCaptivePortal: captiveportal.Check(),
 		CheckFacebookHTTP:   checkhttp.CheckFacebookHTTP(),
+		QueryGoogleDNSA:     internetstatus_dns.QueryGoogleDNSA(),
 		QueryRootDNSA:       internetstatus_dns.QueryRootDNSA(),
 		QueryRootDNSAAAA:    errorCheckNotPerformed,
 	}
