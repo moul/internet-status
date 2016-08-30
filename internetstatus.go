@@ -35,6 +35,24 @@ func (r *Result) Access() bool {
 	return r.IPv4Access() || r.IPv6Access()
 }
 
+func checkReturnAsString(ret error) string {
+	if ret == nil {
+		return "success"
+	}
+
+	return fmt.Sprintf("error: %v", ret)
+}
+
+// Map returns a map[string]error representation of the object
+func (r *Result) Map() map[string]string {
+	return map[string]string{
+		"BehindCaptivePortal": checkReturnAsString(r.BehindCaptivePortal),
+		"CheckFacebookHTTP":   checkReturnAsString(r.CheckFacebookHTTP),
+		"QueryRootDNSA":       checkReturnAsString(r.QueryRootDNSA),
+		"QueryRootDNSAAAA":    checkReturnAsString(r.QueryRootDNSAAAA),
+	}
+}
+
 // Full performs all the checks to determine the connectivity status (most accurate)
 func Full() Result {
 	return Result{

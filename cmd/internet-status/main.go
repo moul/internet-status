@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"os"
 
@@ -26,6 +27,8 @@ func run(c *cli.Context) error {
 	log.Printf("Access(): %v", result.Access())
 	log.Printf("IPv4Access(): %v", result.IPv4Access())
 	log.Printf("IPv6Access(): %v", result.IPv6Access())
-	log.Printf("Result: %v\n", result)
+
+	jsonOutput, _ := json.MarshalIndent(result.Map(), "", "  ")
+	log.Printf("Result: %s\n", jsonOutput)
 	return nil
 }
