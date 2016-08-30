@@ -3,11 +3,17 @@ package main
 import (
 	"encoding/json"
 	"log"
+	"math/rand"
 	"os"
+	"time"
 
 	"github.com/moul/internet-status"
 	"github.com/urfave/cli"
 )
+
+func init() {
+	rand.Seed(time.Now().UTC().UnixNano())
+}
 
 func main() {
 	app := cli.NewApp()
