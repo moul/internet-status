@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/moul/internet-status/pkg/captiveportal"
+	"github.com/moul/internet-status/pkg/checkhttp"
 	"github.com/moul/internet-status/pkg/dns"
 )
 
@@ -16,6 +17,7 @@ type Result struct {
 	BehindCaptivePortal error
 	QueryRootDNSA       error
 	QueryRootDNSAAAA    error
+	CheckFacebookHTTP   error
 }
 
 // IPv4Access returns true if IPv4 connectivity is available
@@ -38,6 +40,7 @@ func Full() Result {
 	return Result{
 		Type:                "full",
 		BehindCaptivePortal: captiveportal.Check(),
+		CheckFacebookHTTP:   checkhttp.CheckFacebookHTTP(),
 		QueryRootDNSA:       internetstatus_dns.QueryRootDNSA(),
 		QueryRootDNSAAAA:    internetstatus_dns.QueryRootDNSAAAA(),
 	}
@@ -48,6 +51,7 @@ func Quick() Result {
 	return Result{
 		Type:                "full",
 		BehindCaptivePortal: captiveportal.Check(),
+		CheckFacebookHTTP:   checkhttp.CheckFacebookHTTP(),
 		QueryRootDNSA:       internetstatus_dns.QueryRootDNSA(),
 		QueryRootDNSAAAA:    errorCheckNotPerformed,
 	}
