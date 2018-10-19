@@ -1,4 +1,7 @@
 # internet-status
+
+[![GuardRails badge](https://badges.production.guardrails.io/moul/internet-status.svg)](https://www.guardrails.io)
+
 :signal_strength: Check internet connectivity
 
 This project aims to check multiple factors to determine your internet connectivity.
